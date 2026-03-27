@@ -66,8 +66,19 @@ RUN echo 'if [ -n "$PS1" ]; then' >> /home/appuser/.bashrc \
  && chown appuser:appuser /home/appuser/.bashrc
 
 #以 appuser 身份執行
-USER appuser
-WORKDIR /home/appuser
+USER appuser [cite: 4]
+WORKDIR /home/appuser 
+
+# 11. 建立預設音效卡設定檔 (解決 Pygame / ALSA 格式與通道問題)
+RUN echo -e 'pcm.!default {\n\
+    type plug\n\
+    slave.pcm "hw:2,0"\n\
+}\n\
+\n\
+ctl.!default {\n\
+    type hw\n\
+    card 2\n\
+}' > /home/appuser/.asoundrc
 
 RUN python3 -m venv --system-site-packages /home/appuser/yolo_env && \
     /home/appuser/yolo_env/bin/pip install --upgrade pip setuptools wheel -i https://pypi.org/simple && \
