@@ -20,7 +20,8 @@ RUN apt install -y locales curl gnupg lsb-release software-properties-common por
 # 3. 安裝speech_ws需要的套件
 RUN pip3 install --no-cache-dir --index-url https://pypi.org/simple \
 vosk webrtcvad openai-whisper speechbrain soundfile openai pyttsx3 \
-pycryptodome websocket-client pyaudio sounddevice gTTS pygame libusb-package
+pycryptodome websocket-client pyaudio sounddevice gTTS pygame libusb-package \
+openwakeword
 
 RUN pip3 install --no-cache-dir --index-url https://pypi.org/simple \
 ruamel.yaml.clib==0.2.7 ruamel.yaml==0.17.32 hyperpyyaml==1.0.0
